@@ -1,12 +1,17 @@
 package com.example.recyclerview;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
+
+    private RecyclerView recyclerView; // для связи разметки и кода
+    private RecyclerView.Adapter adapter; // мост между данными и их отображением на экране
+    private RecyclerView.LayoutManager layoutManager; // управление расположением элементов
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
