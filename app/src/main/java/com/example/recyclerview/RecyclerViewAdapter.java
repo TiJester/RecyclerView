@@ -9,26 +9,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
+
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.RecyclerViewViewHolder> {
-    @NonNull
-    @Override
-    public RecyclerViewViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) { // передача разметки
-        //return null;
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_view_item,
-                parent, false);
-        RecyclerViewViewHolder recyclerViewViewHolder = new RecyclerViewViewHolder(view);
-        return recyclerViewViewHolder;
-    }
-
-    @Override
-    public void onBindViewHolder(@NonNull RecyclerViewViewHolder holder, int position) {
-
-    }
-
-    @Override
-    public int getItemCount() {
-        return 0;
-    }
 
     public static class RecyclerViewViewHolder extends RecyclerView.ViewHolder{
 
@@ -43,4 +26,34 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             textView2 = itemView.findViewById(R.id.textView2);
         }
     }
+    private ArrayList<RecyclerViewItem> arrayList;
+
+    public RecyclerViewAdapter(ArrayList<RecyclerViewItem> arrayList) {//Констуктор
+        this.arrayList = arrayList;
+    }
+    @NonNull
+    @Override
+    public RecyclerViewViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) { // передача разметки
+        //return null;
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_view_item,
+                parent, false);
+        RecyclerViewViewHolder recyclerViewViewHolder = new RecyclerViewViewHolder(view);
+        return recyclerViewViewHolder;
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull RecyclerViewViewHolder holder, int position) {
+        RecyclerViewItem recyclerViewItem = arrayList.get(position);
+
+        holder.imageView.setImageResource(recyclerViewItem.getImageResource());
+        holder.textView1.setText(recyclerViewItem.getText1());
+        holder.textView2.setText(recyclerViewItem.getText2());
+    }
+
+    @Override
+    public int getItemCount() {
+        return arrayList.size();
+    }
+
+
 }
